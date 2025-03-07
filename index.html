@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feel Better My Love</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4, #ff758c);
+            animation: backgroundAnimation 5s infinite alternate;
+            perspective: 1000px;
+            overflow: hidden;
+        }
+        
+        @keyframes backgroundAnimation {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+        
+        .floating-heart {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: red;
+            clip-path: polygon(50% 0%, 100% 35%, 75% 100%, 50% 75%, 25% 100%, 0% 35%);
+            opacity: 0.6;
+            animation: floatUp 5s infinite linear;
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(100vh) scale(0.5); opacity: 1; }
+            100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+        }
+        
+        .container {
+            max-width: 500px;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.3);
+            transform: rotateY(10deg);
+            transition: transform 0.5s;
+        }
+        .container:hover {
+            transform: rotateY(0deg);
+        }
+        
+        #photo {
+            width: 250px;
+            height: 250px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: transform 0.5s ease-in-out, opacity 0.5s;
+            opacity: 0;
+        }
+        .medicine-wrap {
+            display: inline-block;
+            padding: 15px;
+            background: white;
+            border-radius: 50%;
+            border: 8px solid red;
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
+            transform: scale(0.5) rotateY(180deg);
+            transition: transform 1s ease-in-out;
+        }
+        
+        .hidden {
+            display: none;
+        }
+
+        .click-btn {
+            background: #ff4d6d;
+            color: white;
+            font-size: 18px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background 0.3s ease-in-out;
+        }
+        .click-btn:hover {
+            background: #ff1e4d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>My Love, Get Well Soon ❤️</h2>
+        <p>You are my heart’s melody, my sweetest dream, and the love that makes every moment magical. Seeing you unwell breaks my heart, but know that my love and warmth surround you like the softest embrace. Close your eyes, feel my presence, and let every beat of my heart whisper, "I love you, my Theoderon." Get well soon, my love. 💖</p>
+        
+        <button class="click-btn" onclick="playMusic()">Click Jana</button>
+        
+        <div id="medicineContainer" class="hidden">
+            <div class="medicine-wrap" id="medicineSymbol">
+                <img id="photo" src="2.jpg" alt="My Love">
+            </div>
+        </div>
+        <audio id="song" src="ishq2.mp3"></audio>
+    </div>
+    
+    <script>
+        function playMusic() {
+            let song = document.getElementById('song');
+            let photo = document.getElementById('photo');
+            let medicineContainer = document.getElementById('medicineContainer');
+            let medicineSymbol = document.getElementById('medicineSymbol');
+            
+            song.play();
+            
+            medicineContainer.classList.remove('hidden');
+            setTimeout(() => {
+                medicineSymbol.style.transform = 'scale(1) rotateY(0deg)';
+                photo.style.opacity = 1;
+                photo.style.transform = 'scale(1.1) rotateY(0deg)';
+            }, 500);
+        }
+        
+        function createFloatingHearts() {
+            for (let i = 0; i < 20; i++) {
+                let heart = document.createElement('div');
+                heart.classList.add('floating-heart');
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 5000);
+            }
+        }
+        setInterval(createFloatingHearts, 1000);
+    </script>
+</body>
+</html>
